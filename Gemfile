@@ -28,3 +28,6 @@ group :development do
   # gem "spring"
 end
 
+gem 'bcrypt'
+gem 'active_model_serializers'
+gem 'dotenv'
