@@ -6,6 +6,7 @@ class FavoritesController < ApplicationController
   end
 
   def create
+    params[:user_id] = session[:user_id]
     render json: Favorite.create!(favorite_params), status: :created
   end
 
