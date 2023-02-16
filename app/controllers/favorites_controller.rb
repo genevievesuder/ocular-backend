@@ -15,7 +15,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite.destroy
+    Favorite.where(user_id: session[:user_id], definition_id:params[:id]).destroy_all
     head :no_content
   end
 

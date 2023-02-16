@@ -12,9 +12,6 @@ include ActionController::Cookies
     def authorized_user
         render json: {errors: "unauthorized"}, status: :unauthorized unless current_user
     end
-
-    
-
         
       private
         def invalid(invalid)
