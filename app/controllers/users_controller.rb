@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :find_user, only: [:show, :update, :destroy]
+before_action :find_user, only: [:update, :destroy]
 skip_before_action :authorized_user, only: [:create]
 
   def index
@@ -12,6 +12,7 @@ skip_before_action :authorized_user, only: [:create]
 
   def create
     new_user = User.create!(user_params)
+    session[:user_id] = new_user.id
       render json: new_user, status: :created
   end
 
@@ -23,14 +24,6 @@ skip_before_action :authorized_user, only: [:create]
     @user.destroy
     head :no_content
   end
-
-  # def add_favorite
-
-  # end
-
-  # def un_favorite
-
-  # end
 
   private
 
