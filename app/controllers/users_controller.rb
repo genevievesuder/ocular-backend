@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :find_user, only: [:update, :destroy]
+# before_action :find_user, only: [:destroy, :update] ##Removed update
 skip_before_action :authorized_user, only: [:create]
 
   def index
@@ -17,7 +17,8 @@ skip_before_action :authorized_user, only: [:create]
   end
 
   def update
-    render json: @user.update!(user_params), status: :ok
+    @user.update!(user_params)
+    render json: @user, status: :ok
   end
 
   def destroy
@@ -27,9 +28,9 @@ skip_before_action :authorized_user, only: [:create]
 
   private
 
-    def find_user
-      @user = User.find(params[:id])
-    end
+    # def find_user
+    #   @user = User.find(params[:id])
+    # end
 
     def user_params
       params.permit(:password, :education, :title, :field, :about, :email, :username)
