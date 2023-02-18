@@ -16,7 +16,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    render json: @post.update!(post_params), status: :ok
+    @post.update!(post_params)
+    render json: @post, status: :ok
   end
 
   def destroy
