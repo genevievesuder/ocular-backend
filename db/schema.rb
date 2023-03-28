@@ -11,17 +11,20 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_02_164308) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "definitions", force: :cascade do |t|
-    t.string "term"
+    t.text "term"
     t.text "definition"
-    t.string "category"
+    t.text "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "definition_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "definition_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["definition_id"], name: "index_favorites_on_definition_id"
@@ -29,28 +32,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_164308) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
+    t.text "title"
     t.text "content"
-    t.string "image"
-    t.integer "user_id", null: false
+    t.text "image"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "username"
-    t.string "password_digest"
-    t.string "education"
-    t.string "title"
-    t.string "field"
+    t.text "email"
+    t.text "username"
+    t.text "password_digest"
+    t.text "education"
+    t.text "title"
+    t.text "field"
     t.text "about"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "favorites", "definitions"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "posts", "users"
+  add_foreign_key "favorites", "users", on_delete: :cascade
+  add_foreign_key "posts", "users", on_delete: :cascade
 end
