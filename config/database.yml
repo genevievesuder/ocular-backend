@@ -23,22 +23,23 @@
 # production:
 #   <<: *default
 #   database: db/production.sqlite3
+
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
 
-# development:
+development:
 #  url: postgres://genevievesuder:jVD933fjJU9afysN3BEr6wTM3tAvrL0s@dpg-cghjpcqk728ss55r21hg-a/oculardb
-#  adapter: postgresql
-#  encoding: unicode
-#  database: ocular_development 
-#  pool: 5
-#  timeout: 5000
+ adapter: postgresql
+ encoding: unicode
+ database: ocular_development 
+ pool: 5
+ timeout: 5000
 
-# test:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: ocular_test
-#   pool: 5
-#   timeout: 5000
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ocular_test
+  pool: 5
+  timeout: 5000
