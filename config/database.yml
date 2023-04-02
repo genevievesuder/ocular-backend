@@ -5,9 +5,9 @@
 #   gem "sqlite3"
 #
 # default: &default
-#   adapter: sqlite3
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#   timeout: 5000
+# adapter: postgresql
+# pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+# timeout: 5000
 
 # development:
 #   <<: *default
@@ -24,20 +24,26 @@
 #   <<: *default
 #   database: db/production.sqlite3
 
-production:
+#production:
+#  <<: *default
+#  url: <%= ENV['DATABASE_URL'] %>
+ production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-
+  host: <%= ENV['DB_HOST'] %>
+  port: 5432
+  database: <%= ENV['DB_DATABASE'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 development:
-#  url: postgres://genevievesuder:jVD933fjJU9afysN3BEr6wTM3tAvrL0s@dpg-cghjpcqk728ss55r21hg-a/oculardb
- adapter: postgresql
- encoding: unicode
- database: ocular_development 
- pool: 5
- timeout: 5000
+  url: postgres://genevievesuder:jVD933fjJU9afysN3BEr6wTM3tAvrL0s@dpg-cghjpcqk728ss55r21hg-a/oculardb
+  adapter: postgresql
+  encoding: unicode
+  database: ocular_development 
+  pool: 5
+  timeout: 5000
 
-test:
+ test:
   adapter: postgresql
   encoding: unicode
   database: ocular_test
